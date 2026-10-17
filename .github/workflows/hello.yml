@@ -12,4 +12,8 @@ jobs:
         run: echo "Hello from CI"
       - name: Show compiler
         run: g++ --version
+      - name: error
+        run: false
+      - name: hi
+        run: echo "it will not print"
   
