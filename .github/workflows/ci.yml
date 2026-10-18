@@ -1,0 +1,14 @@
+name: CI
+on:
+  push:
+  pull_request:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Build tests
+        run: g++ stats.cpp test_stats.cpp -o test_stats
+      - name: Run tests
+        run: ./test_stats
