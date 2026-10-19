@@ -20,6 +20,12 @@ jobs:
         run: cmake --build build
       - name: Test
         run: ctest --test-dir build --output-on-failure
+      - name: Upload test log
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: test-log-${{ matrix.compiler }}
+          path: build/Testing/Temporary/LastTest.log
   format:
     runs-on: ubuntu-latest
     steps:
