@@ -6,10 +6,16 @@ on:
 jobs:
   test:
     runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        compiler: [g++, clang++]
     steps:
       - uses: actions/checkout@v4
       - name: Configure
         run: cmake -S . -B build
+        env:
+          CXX: ${{ matrix.compiler }}
       - name: Build
         run: cmake --build build
       - name: Test
