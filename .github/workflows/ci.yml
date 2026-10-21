@@ -58,3 +58,12 @@ jobs:
         run: cmake --build build
       - name: Test
         run: ctest --test-dir build --output-on-failure
+    docker:
+    runs-on: ubuntu-latest
+    needs: [test]
+    steps:
+      - uses: actions/checkout@v4
+      - name: Build image
+        run: docker build -t fastmath:ci .
+      - name: Run tests in container
+        run: docker run --rm fastmath:ci
